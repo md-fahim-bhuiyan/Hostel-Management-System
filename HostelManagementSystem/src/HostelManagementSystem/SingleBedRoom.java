@@ -9,11 +9,10 @@ public class SingleBedRoom extends Room {
         System.out.println("*****Single Bed Room*****");
     }
 
-    public void StudentId(String RM, String ID, String Name) {
+    public void StudentId(String RM, String ID) {
         roomNumber = RM;
         studentId = ID;
-        studentName =Name
-    }
+          }
 
     public void printSID() {
         System.out.println("" + roomNumber + " is Allowed Student Id = " + studentId);
