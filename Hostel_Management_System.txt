@@ -1,0 +1,735 @@
+Hostel Management System
+
+IBonus.java
+
+package HostelManagementSystem;
+
+public interface IBonus {
+
+    void get_EidAlFitr_Bonus();
+    void get_EidAlAdha_Bonus();
+}
+
+IDiscount.java
+
+package HostelManagementSystem;
+
+public interface IDiscount {
+    void getDiscount();
+}
+
+
+Admin.java
+
+package Admin;
+
+public abstract class Admin {
+
+    public String name, adminId, age, performance, shift;
+    public double salary;
+
+    public void setinformation(String N, String I, String A, String P, String S) {
+        name = N;
+        adminId = I;
+        age = A;
+        performance = P;
+        shift = S;
+    }
+
+    public void printInformation() {
+        System.out.println("Name = " + name);
+        System.out.println("Admin Id = " + adminId);
+        System.out.println("Age = " + age);
+        System.out.println("Performance = " + performance);
+        System.out.println("Shift = " + shift);
+    }
+
+    public void getHealthInsurance()//Override without Interface
+    {
+        System.out.println("Health Insurance = " + salary * 0.05);
+    }
+
+    public abstract void MonitorActivitis();
+
+}
+
+JuniorAdmin.java
+
+package Admin;
+
+import HostelManagementSystem.IBonus;
+
+public class JuniorAdmin extends Admin implements IBonus {
+
+    public String numberOfJob;
+
+    public JuniorAdmin(String NJ, double S) {
+        System.out.println("");
+        System.out.println("*****Junior Admin*****");
+        numberOfJob = NJ;
+        salary = S;
+    }
+
+    @Override //Override without Interface
+    public void getHealthInsurance() {
+        System.out.println("Health Insurance= " + (salary * 0.035));
+    }
+
+    public void job_number() {
+        System.out.println("Number of Job= " + numberOfJob);
+    }
+
+    public void printJuniorAdminSalary() {
+        System.out.println("Salary = " + salary);
+    }
+
+    @Override
+    public void get_EidAlFitr_Bonus() {
+        System.out.println("Bonus of Eid Al Fitr= " + (salary * 0.075));
+    }
+
+    @Override
+    public void get_EidAlAdha_Bonus() {
+        System.out.println("Bonus of Eid Al Adha= " + (salary * 0.05));
+    }
+
+    @Override
+    public void MonitorActivitis() {
+        System.out.println("Junior Admin monitors activities on website development");
+    }
+}
+
+
+SeniorAdmin.java
+
+package Admin;
+
+import HostelManagementSystem.IBonus;
+
+public class SeniorAdmin extends Admin implements IBonus {
+
+    public String timeOfExprince;
+
+    public SeniorAdmin(String TE, double S) {
+        System.out.println("");
+        System.out.println("*****Senior Admin*****");
+        timeOfExprince = TE;
+        salary = S;
+    }
+
+    public void printSeniorAdminEx() {
+        System.out.println("Exprince = " + timeOfExprince);
+    }
+
+    public void printSeniorAdminSalary() {
+        System.out.println("Salary = " + salary);
+    }
+
+    @Override
+    public void get_EidAlFitr_Bonus() {
+        System.out.println("Bonus of Eid Al Fitr= " + (salary * 0.1));
+    }
+
+    @Override
+    public void get_EidAlAdha_Bonus() {
+        System.out.println("Bonus of Eid Al Adha= " + (salary * 0.075));
+    }
+
+    @Override
+    public void MonitorActivitis() {
+        System.out.println("Senior Admin monitors activities on Hostel Management System development");
+    }
+
+}
+
+
+Employee.java
+
+package Employee;
+
+public class Employee {
+
+    public String eId, Name, Age, performance;
+    public double salary;
+
+    public void setInformation(String I, String N, String A, String P, double S) {
+        eId = I;
+        Name = N;
+        Age = A;
+        performance = P;
+        salary = S;
+    }
+
+    public void printInfo() {
+        System.out.println("ID = " + eId);
+        System.out.println("Name = " + Name);
+        System.out.println("Age = " + Age);
+        System.out.println("Performance = " + performance);
+        System.out.println("Salary= " + salary);
+    }
+
+    public void SalaryExtandPerYear() //Override without Interface
+    {
+        System.out.println("All Empolyee has 10% Salary Extand Per Year");
+    }
+}
+
+Manager.java
+
+package Employee;
+
+import HostelManagementSystem.IBonus;
+
+public class Manager extends Employee implements IBonus {
+
+    private String Status;
+
+    public Manager() {
+        System.out.println("*****Manager*****");
+    }
+
+    public void checkingDocoment(String S) {
+        Status = S;
+        switch (Status) {
+            case "Done":
+                System.out.println("Docoment is Done");
+                break;
+            case "ok":
+                System.out.println("Docoment is ok");
+                break;
+            default:
+                System.out.println("Docoment Is not complite");
+                break;
+        }
+    }
+
+    @Override
+    public void get_EidAlFitr_Bonus() {
+        System.out.println("Bonus of Eid Al Fitr= " + (salary * 0.75));
+    }
+
+    @Override
+    public void get_EidAlAdha_Bonus() {
+        System.out.println("Bonus of Eid Al Fitr= " + (salary * 0.50));
+    }
+
+    @Override
+    public void SalaryExtandPerYear()//Override without Interface
+    {
+        System.out.println("Only Manager has 15% Salary Extand Per Year");
+    }
+}
+
+Supervisor.java
+
+package Employee;
+
+import HostelManagementSystem.IBonus;
+
+public class Supervisor extends Employee implements IBonus {
+
+    private String status;
+    public String workhour;
+
+    public   Supervisor(String Wh) {
+        System.out.println("");
+        System.out.println("*****Supervisor*****");
+        workhour = Wh;
+    }
+
+   public void worktimeSupervisor() {
+        System.out.println("Working Time= " + workhour + " Hours");
+    }
+
+   public void CheckStudentDetails(String S) {
+        status = S;
+        switch (status) {
+            case "Fine":
+                System.out.println("All Students are Fine");
+                break;
+            case "Ok":
+                System.out.println("All Students are Ok");
+                break;
+            default:
+                System.out.println("Invalid Input");
+                break;
+        }
+    }
+
+    @Override
+    public void get_EidAlFitr_Bonus() {
+        System.out.println("Bonus of Eid Al Fitr= " + (salary * 0.40));
+    }
+
+    @Override
+    public void get_EidAlAdha_Bonus() {
+        System.out.println("Bonus of Eid Al Fitr= " + (salary * 0.35));
+    }
+
+}
+
+Food.java
+
+package Food;
+
+public class Food {
+
+    private String food_Item, category, sell, orderBy;
+
+    public void setFoodInfo(String fI, String C, String S, String O) {
+        food_Item = fI;
+        category = C;
+        sell = S;
+        orderBy = O;
+    }
+
+    public void printFoodInfo() {
+        System.out.println("");
+        System.out.println("********Food Details********");
+        System.out.println("Number Of Food Item= " + food_Item);
+        System.out.println("Category= " + category);
+        System.out.println("Sell On= " + sell);
+        System.out.println("Order By= " + orderBy);
+    }
+}
+
+
+Non_Veg_Food.java
+
+package Food;
+
+public class Non_Veg_Food extends Food {
+
+    public double melnonvegfood;
+
+    public void Non_VagFoodManu() {
+        System.out.println("");
+        System.out.println("*****Veg Food Manu*****");
+        System.out.println("Item:\n1.Chicken Biryani \t2.Chicken Nihari \t3. Chicken Manchorian \t4.Paraha \t5.Allu Gohi \t6.Roti\t7.Mutton Korma");
+    }
+
+    public void CostForNonVagFood(double me) {
+        melnonvegfood = me;
+    }
+
+    public void CostForNonVagFood()//overloaded methods
+    {
+        System.out.println("Cost of " + melnonvegfood + " BDT per mel Non Veg Food");
+    }
+
+}
+
+
+Veg_Food.java
+
+package Food;
+
+public class Veg_Food extends Food {
+
+    public double melvegfood;
+
+    public void VagFoodManu() {
+        System.out.println("");
+        System.out.println("*****Non-Veg Food Manu*****");
+        System.out.println("Item:\n1.Tea \t2.Rice \t3. Oats \t4.Paraha \t5.Allu Gohi \t6.Roti \t7. Carrots");
+    }
+
+    public void CostForVagFood(double me) {
+        melvegfood = me;
+    }
+
+    public void CostForVagFood()//overloaded methods
+    {
+        System.out.println("Cost of " + melvegfood + " BDT per mel Veg Food");
+    }
+}
+
+Room.java
+
+package Room;
+
+public class Room {
+
+    private String roomSize, numOfWindow;
+    public String roomNumber;
+    public double rentPDay, rentPMonth;
+
+    public void setRoomInfo(String RN, String RS, String NW) {
+        roomNumber = RN;
+        roomSize = RS;
+        numOfWindow = NW;
+    }
+
+    public void rentPerDay(double RD) {
+        rentPDay = RD;
+    }
+
+    public void rentPerMonth(double RM) {
+        rentPMonth = RM;
+    }
+
+    public void printRoomInfo() {
+        System.out.println("Room Number = " + roomNumber);
+        System.out.println("Room Size = " + roomSize);
+        System.out.println("Number of Window = " + numOfWindow);
+        System.out.println("Rent Per Month= " + rentPMonth);
+        System.out.println("Rent Per Day = " + rentPDay);
+    }
+}
+
+SingleBedRoom.java
+
+package Room;
+
+public class SingleBedRoom extends Room {
+
+    private String studentId;
+
+    public void SingleBedRoom() {
+        System.out.println("");
+        System.out.println("*****Single Bed Room*****");
+    }
+
+    public void StudentId(String RM, String ID) {
+        roomNumber = RM;
+        studentId = ID;
+    }
+
+    public void printSID() {
+        System.out.println("" + roomNumber + " is Allowed Student Id = " + studentId);
+    }
+}
+
+DoubleBedRoom.java
+
+package Room;
+
+public class DoubleBedRoom extends Room {
+
+    public int numberOfBed;
+    public String studentId1, studentId2;
+
+    public void DoubleBedRoom() {
+        System.out.println("");
+        System.out.println("*****Double Bed Room*****");
+    }
+
+    public void info(int NB) 
+    {
+        numberOfBed = NB;
+    }
+
+    public void info() {
+        System.out.println("Number of Bed= " + numberOfBed);
+    }
+
+    public void StudentId(String ID, String Id, String RM) {
+        studentId1 = ID;
+        studentId2 = Id;
+        roomNumber = RM;
+    }
+
+    public void printSID() {
+        System.out.println("" + roomNumber + " is Allowed Student Id = " + studentId1 + "&" + studentId2);
+    }
+}
+
+Student.java
+
+package Student;
+
+public class Student {
+
+  public  String name, sId, age, cgpa;
+
+   public void setInformation(String N, String I, String A, String CG) {
+        name = N;
+        sId = I;
+        age = A;
+        cgpa = CG;
+    }
+
+  public  void printinformation() {
+        System.out.println("Student's Name = " + name);
+        System.out.println("Id = " + sId);
+        System.out.println("Age = " + age);
+        System.out.println("CGPA = " + cgpa);
+    }
+    
+}
+
+PermanentStudent.java
+
+package Student;
+
+import HostelManagementSystem.IDiscount;
+
+public class PermanentStudent extends Student implements IDiscount {
+
+    public String behave;
+    private double rentPM, rentPD, numberOfMal, rent, foodcost;
+    public double totalcost;
+    private int nBed;
+
+    public PermanentStudent(String b, double m) {
+        System.out.println("");
+        System.out.println("*****Permanent Student*****");
+        behave = b;
+    }
+
+    public void cost_of_PermanentStudent(int i, double k, int NB) {
+
+        if (i == 1) {
+            rentPM = k;
+            System.out.println("" + name + " is Single bed Room student");
+            System.out.println("Room Rent= " + rentPM);
+            rent = rentPM;
+        } else if (i == 2) {
+            nBed = NB;
+            rentPD = k;
+            System.out.println("" + name + " is Double bed Room student");
+            System.out.println("Room Rent= " + rentPD / nBed);
+            rent = rentPD / nBed;
+        }
+    }
+
+    public void cost_of_PermanentStudent(int i, double m, double f)//overloaded methods
+    {
+
+        if (i == 1) {
+            numberOfMal = m;
+            double melnonvegfood = f;
+            System.out.println("And he is a Non-Vegetarian");
+            numberOfMal = m;
+            foodcost = numberOfMal * melnonvegfood;
+            System.out.println("Food Cost= " + foodcost);
+        } else if (i == 2) {
+            numberOfMal = m;
+            double melvegfood = f;
+            System.out.println("And he is a Vegetarian");
+            numberOfMal = m;
+            foodcost = numberOfMal * melvegfood;
+            System.out.println("Food Cost= " + foodcost);
+        }
+    }
+
+    public void costCalculation() {
+        totalcost = rent + foodcost;
+    }
+
+    public void printcost(double i)//overloaded methods
+    {
+        totalcost = i;
+        System.out.println("Total cost= " + (totalcost));
+    }
+
+    @Override
+    public void getDiscount() {
+        System.out.println("Discount= " + (totalcost * 0.1));
+    }
+
+    public void printcost() {
+        System.out.println("Total cost after discount= " + (totalcost * 0.9));
+    }
+}
+
+TemporarilyStudent.java
+
+package Student;
+
+import HostelManagementSystem.IDiscount;
+
+public class TemporarilyStudent extends Student implements IDiscount {
+
+    private double rentPM, rentPD, rent, foodcost;
+    public double totalcost, numberOfMal, totalday;
+    private int nBed;
+
+    public TemporarilyStudent(double TD, double m) {
+        System.out.println("");
+        System.out.println("*****Temporarily Student*****");
+        totalday = TD;
+        numberOfMal = m;
+    }
+
+    public void cost_of_TemporarilyStudent(int i, double k, int NB) {
+        i = i;
+        if (i == 1) {
+            rentPD = k;
+            System.out.println("" + name + " is Single bed Room student");
+            rent = rentPD * totalday;
+            System.out.println("Room Rent= " + rentPM);
+
+        } else if (i == 2) {
+            nBed = NB;
+            rentPD = k;
+            System.out.println("" + name + " is Double bed Room student");
+            rent = rentPD * totalday;
+            System.out.println("Room Rent= " + rent / nBed);
+            rent = (rentPD * totalday) / nBed;
+        }
+    }
+
+    public void cost_of_TemporarilyStudent(int i, double f)//overloaded methods
+    {
+
+        if (i == 1) {
+            double melnonvegfood = f;
+            System.out.println("And he is a Non-Vegetarian");
+            foodcost = numberOfMal * melnonvegfood;
+            System.out.println("Food Cost= " + foodcost);
+        } else if (i == 2) {
+            double melvegfood = f;
+            System.out.println("And he is a Vegetarian");
+            foodcost = numberOfMal * melvegfood;
+            System.out.println("Food Cost= " + foodcost);
+        }
+    }
+
+    public void costCalculation() {
+        totalcost = rent + foodcost;
+    }
+
+    public void printcost(double i)//overloaded methods
+    {
+        totalcost = i;
+        System.out.println("Total cost= " + (totalcost));
+    }
+
+    @Override
+    public void getDiscount() {
+        System.out.println("Discount = " + (totalcost * 0.05));
+    }
+
+    public void printcost() {
+        System.out.println("Total cost After Discount= " + (totalcost * 0.95));
+    }
+}
+
+
+Main.java
+
+package HostelManagementSystem;
+
+import Student.PermanentStudent;
+import Student.TemporarilyStudent;
+import Food.Non_Veg_Food;
+import Food.Veg_Food;
+import Food.Food;
+import Room.SingleBedRoom;
+import Room.DoubleBedRoom;
+import Admin.SeniorAdmin;
+import Admin.JuniorAdmin;
+import Employee.Supervisor;
+import Employee.Manager;
+
+public class Main {
+
+    public static void main(String[] args) {
+        System.out.println("**************Hostel Management System **************");
+        SingleBedRoom SR1 = new SingleBedRoom();
+        SR1.rentPerDay(350);
+        SR1.rentPerMonth(5000);
+        Non_Veg_Food NV1 = new Non_Veg_Food();
+        NV1.CostForNonVagFood(80);
+        DoubleBedRoom DB1 = new DoubleBedRoom();
+        DB1.info(2);
+        DB1.rentPerDay(500);
+        DB1.rentPerMonth(9000);
+        Veg_Food V1 = new Veg_Food();
+        V1.CostForVagFood(45);
+
+        System.out.println("\n*******Employee Details********");
+        Manager ali = new Manager();
+        ali.setInformation("M101", "Ali Ahamed", "35 Years", "Excellent", 100000);
+        ali.printInfo();
+        ali.checkingDocoment("Done");
+        ali.get_EidAlFitr_Bonus();
+        ali.get_EidAlAdha_Bonus();
+        ali.SalaryExtandPerYear();
+
+        Supervisor S1 = new Supervisor("10");
+        S1.setInformation("SUP101", "AR Khan", "32 Year", "Ok", 50000);
+        S1.printInfo();
+        S1.SalaryExtandPerYear();
+        S1.CheckStudentDetails("Ok");
+        S1.get_EidAlFitr_Bonus();
+        S1.get_EidAlAdha_Bonus();
+        S1.worktimeSupervisor();
+
+        SeniorAdmin SA1 = new SeniorAdmin("5 Years", 75000);
+        SA1.setinformation("MD. Asraf Khan", "AD101", "27 Years", "Very Good", "Day");
+        SA1.printInformation();
+        SA1.printSeniorAdminEx();
+        SA1.get_EidAlFitr_Bonus();
+        SA1.get_EidAlAdha_Bonus();
+        SA1.getHealthInsurance();
+        SA1.MonitorActivitis();
+        SA1.printSeniorAdminSalary();
+
+        JuniorAdmin JA1 = new JuniorAdmin("1st Job", 30000);
+        JA1.setinformation("Ali Ahamud", "AD102", "22 Years", "Good", "Night");
+        JA1.printInformation();
+        JA1.job_number();
+        JA1.get_EidAlFitr_Bonus();
+        JA1.get_EidAlAdha_Bonus();
+        JA1.getHealthInsurance();
+        JA1.MonitorActivitis();
+        JA1.printJuniorAdminSalary();
+
+        Food F = new Food();
+        F.setFoodInfo("2", " Veg Food & Non-Veg Food", "Canteen", "Student's");
+        F.printFoodInfo();
+        NV1.Non_VagFoodManu();
+        NV1.CostForNonVagFood();
+        V1.VagFoodManu();
+        V1.CostForVagFood();
+
+        System.out.println("\n**********Student Details**********");
+        PermanentStudent PS1 = new PermanentStudent("Good", 80);
+        PS1.setInformation("Joy Khan", "S101", "19", "3.80");
+        PS1.printinformation();
+        PS1.cost_of_PermanentStudent(1, SR1.rentPMonth, 1);
+        PS1.cost_of_PermanentStudent(1, 40, NV1.melnonvegfood);
+        PS1.costCalculation();
+        PS1.printcost(PS1.totalcost);
+        PS1.getDiscount();
+        PS1.printcost();
+
+        TemporarilyStudent TS1 = new TemporarilyStudent(13, 30);
+        TS1.setInformation("Alif Bhuiyan", "S102", "19.5", "3.85");
+        TS1.printinformation();
+        TS1.cost_of_TemporarilyStudent(2, DB1.rentPDay, DB1.numberOfBed);
+        TS1.cost_of_TemporarilyStudent(2, V1.melvegfood);
+        TS1.costCalculation();
+        TS1.printcost(TS1.totalcost);
+        TS1.getDiscount();
+        TS1.printcost();
+
+        TemporarilyStudent TS2 = new TemporarilyStudent(13, 30);
+        TS2.setInformation("Alve Bhuiyan", "S103", "21 Years", "3.90");
+        TS2.printinformation();
+        TS2.cost_of_TemporarilyStudent(2, DB1.rentPDay, DB1.numberOfBed);
+        TS2.cost_of_TemporarilyStudent(2, NV1.melnonvegfood);
+        TS2.costCalculation();
+        TS2.printcost(TS2.totalcost);
+        TS2.getDiscount();
+        TS2.printcost();
+
+        System.out.println("\n*******Room Details*******");
+        SR1.SingleBedRoom();
+        SR1.setRoomInfo("R101", "6 X 7 Foot", "2");
+        SR1.printRoomInfo();
+        SR1.StudentId(SR1.roomNumber, PS1.sId);
+        SR1.printSID();
+
+        DB1.DoubleBedRoom();
+        DB1.setRoomInfo("R201", "10 X 10 Foot", "3");
+        DB1.printRoomInfo();
+        DB1.info();
+        DB1.StudentId(TS1.sId, TS2.sId, DB1.roomNumber);
+        DB1.printSID();
+    }
+
+}
+
