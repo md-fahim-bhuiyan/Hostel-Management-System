@@ -1,1 +1,3 @@
-# Hostal-Management-System
+# Hostal Management System
+### Object Oriented Design 
+
