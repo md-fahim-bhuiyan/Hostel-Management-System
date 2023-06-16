@@ -1,5 +1,5 @@
 # Hostel Management System
-### Object Oriented Design 
+### Object-Oriented Design 
 
 - Student
 - Teacher
